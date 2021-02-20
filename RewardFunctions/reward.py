@@ -149,6 +149,7 @@ def reward_function(params):
                                           raceline[closest_raceline_waypoints[1]])
     #***************************#
 
+    #AI REINFORCEMENT
     reward = 1
 
     #***** AI Punishments *****#
