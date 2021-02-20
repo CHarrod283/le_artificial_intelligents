@@ -137,13 +137,25 @@ print(centroids_dataframe)
 #creating track data
 track_data.insert(0, "coordinate", raceline.path, True)
 f = open("dataFile.txt", "w")
-f.write("track_data = pd.DataFrame([\n")
+f.write("raceline = [\n")
 for index, row in track_data.iterrows():
-    f.write("\t[[" + str(row['coordinate'][0]) + ", " + str(row['coordinate'][1]) + "], ")
-    f.write(str(row['speed']) + ", ")
     if(index != len(track_data) - 1):
-        f.write(str(row['steering']) + "],\n")
+        f.write("\t[" + str(row['coordinate'][0]) + ", " + str(row['coordinate'][1]) + "],\n")
     else:
-        f.write(str(row['steering']) + "]]\n")
-f.write(", columns=['coordinate', 'speed', 'steering'])")
+        f.write("\t[" + str(row['coordinate'][0]) + ", " + str(row['coordinate'][1]) + "]]\n")
+
+f.write("speeds = [\n")
+for index, row in track_data.iterrows():
+    if(index != len(track_data) - 1):
+        f.write("\t" + str(row['speed']) + ",\n")
+    else:
+        f.write("\t" + str(row['speed']) + "]\n")
+
+f.write("steering_angles = [\n")
+for index, row in track_data.iterrows():
+    if(index != len(track_data) - 1):
+        f.write("\t" + str(row['steering']) + ",\n")
+    else:
+        f.write("\t" + str(row['steering']) + "]\n")
+
 
