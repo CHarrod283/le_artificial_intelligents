@@ -1,13 +1,17 @@
 import reward as rw
 
 params = {"all_wheels_on_track" : True,
-          "x" : -7.14731106,
-          "y" : 0.484933341,
+          "x" : -5,
+          "y" : -2.4,
           "progress" : 5,
-          "speed" : 2.894987373062093,
+          "speed" : 2.5,
           "track_width" : 0.6096,
-          "steering_angle" : -1.6046855759720993,
+          "steering_angle" : 2.5,
           "steps": 10
           }
 
-print(rw.reward_function(params))
+
+reward = rw.reward_function(params)
+print("************************")
+print("Total Reward: ")
+print(reward)
