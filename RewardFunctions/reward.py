@@ -46,7 +46,8 @@ def get_closest_waypoints(coords, point):
         index2 = index1 + 1
     #    print("indexes: ", [index2, index1])
         return [index1, index2]
-    
+
+
 
 def get_distance_from_line(point1,point2,point0):
     #returns the distance of point 0 from the line between point 1 and 2
@@ -69,6 +70,9 @@ def diff_of_directions(heading, direction):
     elif direction_diff < -180:
         direction_diff = 360 + direction_diff
     return direction_diff
+
+def point_left_of_line(point, line_point_prev, line_point_next):
+    get_direction(line_point_prev, line_point_next)
 
 def reward_function(params):
     #*****Paste Map Data Here*****#
@@ -766,9 +770,13 @@ def reward_function(params):
     all_wheels_on_track = params["all_wheels_on_track"]
     car_x = params["x"]
     car_y = params["y"]
-    #closest_waypoints = params["closest_waypoints"]
-    #distance_from_center = params["distance_from_center"]
+    closest_waypoints = params["closest_waypoints"]
+    distance_from_center = params["distance_from_center"]
+    waypoints = params["waypoints"]
+    next_waypoint = waypoints[closest_waypoints[1]]
+    prev_waypoint = waypoints[closest_waypoints[0]]
     #is_left_of_center = params["is_left_of_center"]
+    raceline_left_of_center = point_left_of_line(next_raceline_point, prev_waypoint, next_waypoint)
     heading = params["heading"]
     progress = params["progress"]
     speed = params["speed"]
@@ -776,7 +784,7 @@ def reward_function(params):
     steps = params["steps"]
     #track_length = params["track_length"]
     track_width = params["track_width"]
-    #waypoints = params["waypoints"]
+    
     closest_raceline_waypoints = get_closest_waypoints(raceline, [car_x, car_y])
     previous_raceline_point = raceline[closest_raceline_waypoints[0]]
     next_raceline_point = raceline[closest_raceline_waypoints[1]]
